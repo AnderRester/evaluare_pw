@@ -3,7 +3,7 @@
     <div class="main_cont_wrapper">
       <div id="productApps">
         <div id="functions_cont">
-          <select name="" id="productSelector" v-model="selectProduct">
+          <select name id="productSelector" v-model="selectProduct">
             <option value="undefined" disabled>Select Product</option>
             <option value="Mac Book">MacBook</option>
             <option value="Asus ROG">Asus ROG</option>
@@ -13,43 +13,48 @@
           </select>
           <input
             type="number"
-            name=""
+            name
             id="quantityOfProduct"
             v-model="quantityOfProduct"
             placeholder="Quantity"
           />
           <input
             type="number"
-            name=""
+            name
             id="priceOfProduct"
             v-model="priceOfProduct"
             placeholder="Market price"
           />
-          <button @click="addProduct()" id="addProduct">Add Product</button>
-          <button @click="reset()" id="reset">Reset</button>
+          <!-- <button @click="addProduct()" id="addProduct">Add Product</button> -->
+          <button @click="addProductBeta()" id="addProduct">Add Product</button>
+          <!-- <button @click="reset()" id="reset">Reset</button> -->
+          <button @click="reset_beta()" id="reset">Reset</button>
           <div id="buttons"></div>
         </div>
         <div id="productTable">
           <div id="gridAtributes">
             <div id="id">
               <div>Nr</div>
+              <div id="id_beta"></div>
             </div>
             <div id="productName">
               <div>Numele Produsului</div>
+              <div id="productName_beta"></div>
             </div>
             <div id="marketPrice">
               <div>Prețul unei cantități</div>
+              <div id="marketPrice_beta"></div>
             </div>
             <div id="productQuantity">
               <div>Numărul de cantități</div>
+              <div id="productQuantity_beta"></div>
             </div>
             <div id="totalPrice">
               <div>Prețul total</div>
+              <div id="totalPrice_beta"></div>
             </div>
           </div>
-          <div id="finalOrderTable">
-            {{ order }}
-          </div>
+          <!-- <div id="finalOrderTable">{{ order }}</div> -->
         </div>
       </div>
     </div>
@@ -78,11 +83,36 @@ export default {
   },
   methods: {
     addProduct() {
-      this.id++;
-      this.order.push({id: this.id, selectProduct: this.selectProduct, quantityOfProduct: this.quantityOfProduct, priceOfProduct: this.priceOfProduct, totalPrice: (this.priceOfProduct * this.quantityOfProduct)});
+      // this.id++;
+      // this.order.push({ id: this.id, selectProduct: this.selectProduct, quantityOfProduct: this.quantityOfProduct, priceOfProduct: this.priceOfProduct, totalPrice: (this.priceOfProduct * this.quantityOfProduct) });
     },
-    reset() {
-      this.order = [];
+    addProductBeta() {
+      this.id++;
+      const id_beta = document.getElementById("id_beta");
+      const selectProduct_beta = document.getElementById("productName_beta");
+      const quantityOfProduct_beta = document.getElementById("marketPrice_beta");
+      const priceOfProduct_beta = document.getElementById("productQuantity_beta");
+      const totalPrice_beta = document.getElementById("totalPrice_beta");
+      id_beta.append(this.id, document.createElement('br'));
+      selectProduct_beta.append(this.selectProduct, document.createElement('br'));
+      quantityOfProduct_beta.append(this.quantityOfProduct, document.createElement('br'));
+      priceOfProduct_beta.append(this.priceOfProduct, document.createElement('br'));
+      totalPrice_beta.append(this.priceOfProduct * this.quantityOfProduct, document.createElement('br'));
+    },
+    // reset() {
+    //   this.order = [];
+    // },
+    reset_beta() {
+      const id_beta = document.getElementById("id_beta");
+      const selectProduct_beta = document.getElementById("productName_beta");
+      const quantityOfProduct_beta = document.getElementById("marketPrice_beta");
+      const priceOfProduct_beta = document.getElementById("productQuantity_beta");
+      const totalPrice_beta = document.getElementById("totalPrice_beta");
+      id_beta.innerHTML = "";
+      selectProduct_beta.innerHTML = "";
+      quantityOfProduct_beta.innerHTML = "";
+      priceOfProduct_beta.innerHTML = "";
+      totalPrice_beta.innerHTML = "";
     }
   },
 };
@@ -95,6 +125,13 @@ export default {
     display: flex;
     align-items: center;
   }
+}
+#id_beta,
+#productName_beta,
+#marketPrice_beta,
+#productQuantity_beta,
+#totalPrice_beta {
+  display: grid;
 }
 #main_cont_wrapper {
   display: grid;
@@ -125,14 +162,15 @@ export default {
   display: grid;
   grid-template-rows: repeat(2fr);
   background-color: rgb(99, 99, 99);
-  border: 1px solid #000;
+  /* border: 1px solid #000; */
   margin: auto;
 }
 #gridAtributes {
   display: grid;
   grid-template-columns: 0.4fr 1fr 1fr 1fr 1fr;
   background-color: rgb(99, 99, 99);
-  border: 1px solid #000;
+  /* border: 1px solid #000; */
+  border-bottom: 1px solid #000;
 }
 #id,
 #productName,
